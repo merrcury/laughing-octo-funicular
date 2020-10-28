@@ -1,0 +1,30 @@
+# Give the workflow a name. 
+name: Nightly Build
+
+# Trigger Workflow every midnight
+
+on:
+  schedule:
+    - cron: '32 7 * * *'  
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    # This workflow contains a single job called "Create Nightly Release"
+    name: Create Nightly Release
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Create Nighlty Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          with:
+            tag_name: $(date +%F)-Nightly
+            release_name: Release $(date +%F)-Nightly
+            body: |
+              This is a Nightly build
+            draft: false
+            prerelease: false
