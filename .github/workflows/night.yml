@@ -23,9 +23,9 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
           with:
-            tag_name: v$(date +%F)-Nightly
-            release_name: Release $(date +%F)-Nightly
+            tag_name: ${{ github.ref }}.dev$(date '+%Y%m%d)
+            release_name: Release $(date '+%Y%m%d)-Nightly
             body: |
-              This is a Nightly build
+              This is a Nightly build 
             draft: false
-            prerelease: fals
+            prerelease: true
