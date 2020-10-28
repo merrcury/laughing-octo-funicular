@@ -20,12 +20,13 @@ jobs:
         - name: Create Nighlty Release
           id: create_release
           uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-          with:
-            tag_name: ${{ github.ref }}.dev$(date '+%Y%m%d)
-            release_name: Release $(date '+%Y%m%d)-Nightly
-            body: |
-              This is a Nightly build 
-            draft: false
-            prerelease: true
+        - run: echo ${{ github.ref }}.dev$(date '+%Y%m%d)
+#           env:
+#             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#           with:
+#             tag_name: ${{ github.ref }}.dev$(date '+%Y%m%d)
+#             release_name: Release $(date '+%Y%m%d)-Nightly
+#             body: |
+#               This is a Nightly build 
+#             draft: false
+#             prerelease: true
